@@ -20,6 +20,7 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -90,10 +91,10 @@ class MainActivity : ComponentActivity() {
         // Para el intend
         val context = LocalContext.current
 
-        Row (modifier = Modifier
-            .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ){
+        BottomAppBar(
+            containerColor = MaterialTheme.colorScheme.primary
+        )
+        {
             // Compartir
             IconButton(onClick = {
                 val shareIntent = Intent(Intent.ACTION_SEND).apply {

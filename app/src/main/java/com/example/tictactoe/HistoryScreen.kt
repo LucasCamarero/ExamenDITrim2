@@ -52,39 +52,37 @@ fun HistoryScreen(state: GameState, vm: TicTacToeViewModel) {
                     color = MaterialTheme.colorScheme.primary,
                     style = MaterialTheme.typography.bodyLarge
                 )
-            }
-        }
+            } else {
+                LazyColumn() {
+                    state.history.forEach { hist ->
+                        item {
+                            Card(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 6.dp),
+                                elevation = CardDefaults.cardElevation(4.dp)
+                            ){
+                                Row {
+                                    val color = when (hist.result) {
+                                        MatchResult.WIN -> Color(0xFF4CAF50)
+                                        MatchResult.LOSE -> Color(0xFFF44336)
+                                        MatchResult.DRAW -> Color(0xFFFFC107)
+                                    }
 
-        item {
-            LazyColumn() {
-                state.history.forEach { hist ->
-                    item {
-                        Card(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 6.dp),
-                            elevation = CardDefaults.cardElevation(4.dp)
-                        ){
-                            Row {
-                                val color = when (hist.result) {
-                                    MatchResult.WIN -> Color(0xFF4CAF50)
-                                    MatchResult.LOSE -> Color(0xFFF44336)
-                                    MatchResult.DRAW -> Color(0xFFFFC107)
+                                    Text(
+                                        "${hist.result}",
+                                        color = color,
+                                        style = MaterialTheme.typography.bodyLarge
+                                    )
+                                    //containerColor = if (selected == ActionMode.MOVE) Color(0xFF4CAF50) else Color.LightGray
+                                    Spacer(Modifier.width(18.dp))
+
+                                    Text(
+                                        "${hist.difficulty}",
+                                        color = MaterialTheme.colorScheme.primary,
+                                        style = MaterialTheme.typography.bodyLarge
+                                    )
                                 }
-
-                                Text(
-                                    "${hist.result}",
-                                    color = color,
-                                    style = MaterialTheme.typography.bodyLarge
-                                )
-                                //containerColor = if (selected == ActionMode.MOVE) Color(0xFF4CAF50) else Color.LightGray
-                                Spacer(Modifier.width(18.dp))
-
-                                Text(
-                                    "${hist.difficulty}",
-                                    color = MaterialTheme.colorScheme.primary,
-                                    style = MaterialTheme.typography.bodyLarge
-                                )
                             }
                         }
                     }
